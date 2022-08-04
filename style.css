@@ -123,12 +123,15 @@ nav {
 }
 
 .hero-introduction {
+  /* Flex 2 1 40rem allow text section to be larger than 
+  image section in HERO section */
   flex: 2 1 40rem;
   text-align: center;
 }
 
 .hero-introduction p {
   padding: 5rem 10rem;
+  color: var(--grey-text);
 }
 
 .hero-introduction h2 {
@@ -162,10 +165,14 @@ nav {
   left: -20%;
   z-index: -1;
   transform: translateY(10%) rotateZ(5deg) rotateX(190deg);
+  /* Animation for plants movements in Hero Section (alternate-reverse added so animation 
+  works smooth without a break, infinite added for non-stop animation,  */
   animation: plant-entrance 2s ease-in-out 0.5s forwards,
     plant-shake 2.5s infinite ease-in-out alternate-reverse 2s;
+  /* transform-origin for animation starting at the bottom of the image, 
+  by default it would start in the middle */
   transform-origin: bottom;
-  width: 80%;
+  max-height: 80%;
 }
 
 .plant2 {
@@ -173,6 +180,8 @@ nav {
 }
 
 /* ANIMATIONS */
+
+/* Fade Out on Loading Website */
 
 @keyframes opening {
   from {
@@ -183,6 +192,7 @@ nav {
   }
 }
 
+/* Image Animation in Hero Section (Two Plants) */
 @keyframes plant-entrance {
   from {
     transform: translateY(10%) rotateZ(5deg) rotateX(190deg);
@@ -192,11 +202,148 @@ nav {
   }
 }
 
+/* Image Animation in Hero Section - For continious movement  */
+
 @keyframes plant-shake {
   from {
     transform: rotateZ(-5deg);
   }
   to {
     transform: rotateZ(0deg);
+  }
+}
+
+.burger,
+.menu-check {
+  display: none;
+}
+/* ABOUT SECTION */
+
+.about {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.about-text {
+  color: white;
+  flex: 2 1 40rem;
+  justify-content: space-around;
+  background: var(--background-color);
+}
+
+.about-text div {
+  padding: 5rem 8rem;
+}
+
+.about-text h3 {
+  padding: 2rem 0rem;
+  font-family: "Ruhl Medium";
+}
+
+.about-text h2 {
+  font-family: "Vibes";
+  padding: 4rem;
+}
+
+.about-image {
+  flex: 1 1 40rem;
+  position: relative;
+}
+
+.about-image h5 {
+  letter-spacing: 2rem;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  /* transform: translate(-50%, -20%) allows h5 text to be centered,
+   without it it will be centered within a div from 1st leter but visually it will not look centered */
+  transform: translate(-50%, -20%);
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  /* object-fit prevents image from stretching and losing original ratio   */
+  object-fit: cover;
+}
+
+@media screen and (max-width: 842px) {
+  .hero {
+    width: 100%;
+  }
+
+  .hero-introduction p {
+    padding: 5rem 3rem;
+  }
+
+  /*  BURGER MENU */
+  .burger {
+    position: relative;
+    display: block;
+  }
+
+  .burger span {
+    padding: 0.2rem 2rem;
+    background: var(--grey-text);
+    margin: 0.5rem 0rem;
+    display: block;
+    transition: all 0.5s ease;
+  }
+
+  .nav-links {
+    background: var(--background-color);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 1s ease;
+  }
+
+  .nav-links a {
+    color: white;
+    font-size: var(--header3);
+    text-decoration: underline;
+  }
+
+  .menu-check {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translate(5%, -50%);
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 100;
+  }
+
+  .menu-check:checked + .nav-links {
+    transform: translate(-100%);
+  }
+
+  .menu-check:checked ~ .burger span {
+    background: white;
+  }
+
+  .menu-check:checked ~ .burger span:nth-child(1) {
+    transform: rotateZ(45deg) translateY(300%);
+  }
+
+  .menu-check:checked ~ .burger span:nth-child(3) {
+    transform: rotateZ(-45deg) translateY(-300%);
+  }
+
+  .menu-check:checked ~ .burger span:nth-child(2) {
+    opacity: 0;
+  }
+  /* ABOUT SECTION */
+
+  .about-text div {
+    padding: 3rem 3rem;
   }
 }
